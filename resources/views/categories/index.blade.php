@@ -33,7 +33,7 @@
                         <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">Edit</a>
                         <a class="dropdown-item" href="#">Delete</a>
-                        <a class="dropdown-item" href="#">Views</a>
+                        <a class="dropdown-item" href="{{route('categories.show',$category->id)}}">Views</a>
                         </div>
                     </div>
                     </td>
