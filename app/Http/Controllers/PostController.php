@@ -25,6 +25,7 @@ class PostController extends Controller
     public function create()
     {
         //
+        return view('posts.create');
     }
 
     /**
@@ -36,6 +37,17 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+            //Validation of data
+                $this->validate($request, [
+                'category_id' => 'required',
+                'title' => 'required',
+                'body' => 'text',
+                'slug' => 'unique',
+                'status' => 'required',
+                'user_id' => 'required',
+                'type' => 'unique',
+                'image' => 'image|nullable|max:2999'
+            ]);       
     }
 
     /**
@@ -46,9 +58,24 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
+        //File Handling
+        if ($request->hasFile('image')) {
+            
+        }
+        else {
+            $file_name_to_store = 'placeholder.png';
+        }
+            //Create Post
+                $post = new Post;
+                $post->title = $request->title;
+                $post->content = $request->content;
+                $post->image = $file_name_to_store;
+                $post->save();
+    
+            //Redirect
+                return view('posts.index');
+        }
+        
     /**
      * Show the form for editing the specified resource.
      *
