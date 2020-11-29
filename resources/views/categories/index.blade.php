@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
+   @include('components.alert');
 <div class="card" >
 
     <div class="card-body">
@@ -11,11 +13,11 @@
         <h6 class="card-subtitle mb-2 text-muted">Lists of All Post Categories</h6>
             </div>
             <div>
-                <button class="btn btn-primary" data-target="#category-create" data-toggle="modal">Create category</button>
-                @include('modals.category-create')
+            <a class="btn btn-primary" href="{{route('categories.create')}}" >Create</a>
+
             </div>
         </div>
-        
+
             <table class="table">
                 <thead>
                   <tr>
@@ -40,8 +42,21 @@
                         Action
                         </button>
                         <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Edit</a>
-                        <a class="dropdown-item" href="#">Delete</a>
+                        <a class="dropdown-item" href="{{route('categories.edit',$category->id)}}">Edit</a>
+
+
+
+                        <form method="post" action="{{route('categories.destroy',$category->id)}}">
+                            @csrf
+                            @method('delete')
+                            <div class="row">
+                              <div class="col">
+                                <button class="dropdown-item" type="submit">Delete</a>
+                              </div>
+                            </div>
+                          </form>
+
+
                         <a class="dropdown-item" href="{{route('categories.show',$category->id)}}">Views</a>
                         </div>
                     </div>
