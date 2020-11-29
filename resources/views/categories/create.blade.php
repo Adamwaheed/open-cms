@@ -1,21 +1,31 @@
 @extends('layouts.app')
 
 @section('content')
-
-@if(Session::has('success'))
-
-<p class="alert alert-success">{{Session::get('success') }}</p>
-
-@endif
 <div class="container">
-    <form action="/categories" method="POST">
-        @csrf
-        <div class="form-group">
-          <label for="exampleInputEmail1">Name</label>
-          <input type="text" name="name" class="form-control" placeholder="category-name">
+    <div class="card">
+        <div class="card-body">
+
+        <div class= "d-flex justify-content-between">
+            <div>
+                <h5 class="card-title">Categories</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Create</h6>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>  
+
+
+        <form action="{{route('categories.store')}}" method='post'>
+            @csrf
+            @method("POST")
+            <div class="form-group">
+              <label for="name">Category Name</label>
+              <input type="text" name="name" class="form-control">
+            </div>
+
+            <a class="btn btn-info" href="{{url()->previous()}}" >Back</a>
+            <button type="submit" class="btn btn-primary">Save</button>
+
+        </form>
+    </div>
+    </div>
 </div>
- 
 @endsection

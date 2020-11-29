@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Category;
+use Illuminate\Support\Str;
+
 class PostController extends Controller
 {
     /**
@@ -13,8 +16,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        return view('posts.index')->with('posts', $posts);
+        $categories = Category::all();
+        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
+        return view('posts.index')->with(['posts' => $posts, 'categories' => $categories]);
     }
 
     /**
@@ -24,8 +28,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
-        return view('posts.create');
+        $categories = Category::all();
+        return view('posts.create')->with('categories',$categories);
     }
 
     /**
@@ -34,9 +38,25 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Post $post)
     {
-       //
+     $post = new Post();  
+     $post->title = $request->title;
+     $post->body = $request->body;
+     $post->slug = $request->slug;
+     $post->category_id = $request->category_id;
+     $post->user_id = auth()->user()->id;
+     $post->type = $request->type;
+     $post->slug = Str::of($request->title)->slug('-');
+     if($request->status !=="")
+     {
+         $post->status = "published";
+     } else {
+         $post->status = "draft";
+     }
+
+     $post->save();
+     return redirect("/posts");
     }
 
     /**
@@ -45,19 +65,21 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
-    }   
+        return view("posts.show")->with('post', $post);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        $categories = Category::all();
+        return view('posts.edit')->with(['categories'=>$categories,'post'=>$post]);
     }
 
     /**
@@ -67,9 +89,24 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->slug = $request->slug;
+        $post->category_id = $request->category_id;
+        $post->user_id = auth()->user()->id;
+        $post->type = $request->type;
+        $post->slug = Str::of($request->title)->slug('-');
+        if($request->status !=="")
+        {
+            $post->status = "published";
+        } else {
+            $post->status = "draft";
+        }
+
+        $post->save();
+        return redirect("/posts");
     }
 
     /**
@@ -78,8 +115,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect("/posts");
     }
 }
