@@ -16,9 +16,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
-        return view('posts.index')->with(['posts' => $posts, 'categories' => $categories]);
+        $posts = Post::orderBy('created_at', 'desc')->with(['category'])->paginate(10);
+
+        return view('posts.index')->with(['posts' => $posts]);
     }
 
     /**
@@ -40,7 +40,7 @@ class PostController extends Controller
      */
     public function store(Request $request, Post $post)
     {
-     $post = new Post();  
+     $post = new Post();
      $post->title = $request->title;
      $post->body = $request->body;
      $post->slug = $request->slug;

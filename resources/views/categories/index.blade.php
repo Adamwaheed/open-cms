@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-   @include('components.alert');
+   @include('components.alert')
 <div class="card" >
 
     <div class="card-body">

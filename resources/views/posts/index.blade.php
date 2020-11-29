@@ -1,5 +1,4 @@
-@extends('layouts.app');
-
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <div class="card">
@@ -47,15 +46,15 @@
                                 </div>
                             </div>
                         </td>
-                       </tr> 
-                       @include('posts.delete')  
+                       </tr>
+                       @include('posts.delete')
                        @endforeach
-                       {{$posts->links('pagination::bootstrap-4')}} 
+                       {{$posts->links('pagination::bootstrap-4')}}
                     @endif
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-    
+
 @endsection
