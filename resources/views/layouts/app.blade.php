@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Open Cms
@@ -33,10 +33,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                        <a class="nav-link {{ (request()->is('categories')) ? 'active' : '' }}" href="{{route('categories.index')}}">Category</a>
+                        <li class="nav-item">
+
+                        <a class="nav-link {{ request()->is('categories') ? 'text-white' : '' }}" href="{{route('categories.index')}}">Category</a>
+                        </li>
+
+                        <li class="nav-item ">
+                            <a class="nav-link {{ request()->is('posts') ? 'text-white' : '' }}" href="{{route('posts.index')}}">Posts</a>
                         </li>
                     </ul>
+
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
