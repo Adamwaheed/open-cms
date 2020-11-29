@@ -5,8 +5,17 @@
 <div class="card" >
 
     <div class="card-body">
-        <h5 class="card-title">Categories</h5>
+        <div class= "d-flex justify-content-between">
+            <div>
+                <h5 class="card-title">Categories</h5>
         <h6 class="card-subtitle mb-2 text-muted">Lists of All Post Categories</h6>
+            </div>
+            <div>
+                <button class="btn btn-primary" data-target="#category-create" data-toggle="modal">Create category</button>
+                @include('modals.category-create')
+            </div>
+        </div>
+        
             <table class="table">
                 <thead>
                   <tr>
