@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -14,9 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-       return view('users.index', [
-           'users' => User::all()
-       ]);
+        $users = User::orderBy('created_at', 'desc')->paginate(10);
+
+        return view('users.index')->with(['users' => $users]);
     }
 
     /**
@@ -26,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -37,7 +38,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-      
+        $encryptedpassword=Hash::make($request->password);
+
+        $user=new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $encryptedpassword;
+        $user->save();
+
+        return redirect()->route('users.index');
+
+
+
+
     }
 
     /**

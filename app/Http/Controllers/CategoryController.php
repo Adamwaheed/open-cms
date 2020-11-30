@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -39,20 +38,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
-        Category::create([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name)
-        ]);
-
-        return back()->with('success', 'Category created successfuly!');
-=======
         $category = new Category();
         $category->name = $request->name;
         $category->slug = Str::slug($request->name, '-');
         $category->save();
         return redirect()->route('categories.index');
->>>>>>> a84360b457791d49a880bad9c885773de305e618
     }
 
     /**

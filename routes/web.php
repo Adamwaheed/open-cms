@@ -20,11 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('users', [UserController::class, 'index']);
+Route::resource('users', UserController::class);
 
 Route::resource('posts', PostController::class);
 Route::resource('categories', CategoryController::class);
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
