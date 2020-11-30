@@ -26,11 +26,13 @@ class Comment extends Model
      */
     protected $appends=['user_name','post_title'];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function post(){
+    public function post()
+    {
         return $this->belongsTo(Post::class);
     }
 
