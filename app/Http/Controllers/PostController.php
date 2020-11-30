@@ -68,11 +68,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $comments = Comment::query()
-            ->where('post_id',$post->id)
-            ->with('user:id,name')
-            ->get();
-        return view("posts.show")->with(['post'=>$post,'comments'=>$comments]);
+        return view("posts.show")->with('post',$post->load('comments'));
     }
 
     /**

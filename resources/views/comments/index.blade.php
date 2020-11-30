@@ -34,8 +34,8 @@
                   <tr>
                     <th scope="row">{{$comment->id}}</th>
                     <td>{{$comment->body}}</td>
-                    <td>{{$comment->post->title}}</td>
-                    <td>{{$comment->user->name}}</td>
+                    <td>{{$comment->post_title}}</td>
+                    <td>{{$comment->user_name}}</td>
                     <td>{{$comment->created_at}}</td>
                     <td>
                     <!-- Example single danger button -->

@@ -32,9 +32,9 @@
     </div>
     <div class="card mt-3">
         <div class="card-body">
-            <h5 class="card-title">Comments ({{count($comments)}})</h5>
-            @if (count($comments)>0)
-            @foreach ($comments as $key => $comment)
+            <h5 class="card-title">Comments ({{count($post->comments)}})</h5>
+            @if (count($post->comments)>0)
+            @foreach ($post->comments as $key => $comment)
             <div class="media">
                 <img src="https://picsum.photos/100" class="mr-3" alt="...">
                 <div class="media-body">
@@ -49,7 +49,7 @@
                   {!!nl2br($comment->body)!!}
                 </div>
               </div>
-            @if (array_key_last($comments->toArray()) != $key)
+            @if (array_key_last($post->comments->toArray()) != $key)
                 <hr/>
             @endif
               

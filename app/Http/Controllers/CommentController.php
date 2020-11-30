@@ -16,7 +16,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::orderBy('id','desc')->with(['user:id,name','post:id,title'])->paginate();
+        $comments = Comment::orderBy('id','desc')->paginate();
         return view('comments.index')->with('comments', $comments);
 
     }
@@ -45,11 +45,6 @@ class CommentController extends Controller
                 'body' => $request->body
             ]
             );
-        // Comment::create([
-        //     'post_id' => $request->post_id,
-        //     'user_id' => $request->user_id,
-        //     'body' => $request->body
-        // ]);
         
         return redirect()->back();
     }

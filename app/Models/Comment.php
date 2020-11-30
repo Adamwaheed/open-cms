@@ -13,12 +13,26 @@ class Comment extends Model
         'body', 'post_id'
     ];    
 
+    protected $hidden=['user', 'post'];
+
+    protected $appends=['user_name','post_title'];
+
     public function user(){
         return $this->belongsTo(User::class);
     }
 
     public function post(){
         return $this->belongsTo(Post::class);
+    }
+
+    public function getUserNameAttribute()
+    {
+        return $this->user->name;
+    }
+
+    public function getPostTitleAttribute()
+    {
+        return $this->post->title;
     }
 }
 
