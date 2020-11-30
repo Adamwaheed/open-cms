@@ -34,12 +34,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-
-                        <a class="nav-link {{ request()->is('categories') ? 'text-white' : '' }}" href="{{route('categories.index')}}">Category</a>
+                            <a class="nav-link {{ request()->is('categories') ? 'text-white' : '' }}" href="{{route('categories.index')}}">Category</a>
                         </li>
-
                         <li class="nav-item ">
                             <a class="nav-link {{ request()->is('posts') ? 'text-white' : '' }}" href="{{route('posts.index')}}">Posts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('users') ? 'text-white' : '' }}" href="{{route('users.index')}}">Users</a>
                         </li>
                     </ul>
 
