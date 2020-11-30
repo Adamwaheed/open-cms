@@ -13,8 +13,17 @@ class Comment extends Model
         'body', 'post_id'
     ];    
 
+    /**
+     * IF Eager loading user and post remove this hidden attribute
+     */
     protected $hidden=['user', 'post'];
 
+    /**
+     * Appends user_name and post_title with every comment
+     * 
+     * @uses getUserNameAttribute
+     * @uses getPostTitleAttribute
+     */
     protected $appends=['user_name','post_title'];
 
     public function user(){
@@ -25,11 +34,21 @@ class Comment extends Model
         return $this->belongsTo(Post::class);
     }
 
+    /**
+     * Getting the username for this comment
+     * 
+     * @return mix
+     */
     public function getUserNameAttribute()
     {
         return $this->user->name;
     }
 
+    /**
+     * Getting the post title for this comment
+     * 
+     * @return mix
+     */
     public function getPostTitleAttribute()
     {
         return $this->post->title;

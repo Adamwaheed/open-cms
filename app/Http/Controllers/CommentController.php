@@ -39,6 +39,9 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
+        /**
+         *  Createing comment for logged in user.
+         */
         auth()->user()->comments()->create(
             [
                 'post_id' => $request->post_id,
