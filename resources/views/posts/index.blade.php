@@ -49,10 +49,11 @@
                        </tr>
                        @include('posts.delete')
                        @endforeach
-                       {{$posts->links('pagination::bootstrap-4')}}
+                       
                     @endif
                 </tbody>
             </table>
+            {{$posts->links('pagination::bootstrap-4')}}
         </div>
     </div>
 </div>
