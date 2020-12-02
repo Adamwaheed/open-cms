@@ -31,4 +31,4 @@ Route::get('/comments', [App\Http\Controllers\CommentController::class, 'index']
 
 Route::post('/comments', [App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
 
-
+Route::auth();

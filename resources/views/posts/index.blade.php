@@ -9,9 +9,7 @@
                 <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Slug</th>
                         <th>Author</th>
-                        <th>Category</th>
                         <th>Type</th>
                         <th>Created at</th>
                         <th>Status</th>
@@ -26,10 +24,12 @@
                     @else
                        @foreach ($posts as $post)
                        <tr>
-                        <td>{{$post->title}}</td>
-                        <td>{{$post->slug}}</td>
+                        <td>{{$post->title}} <br>
+                        <small>{{$post->category->name}}</small>
+                    </td>
+
                         <td>{{$post->user->name}}</td>
-                        <td>{{$post->category->name}}</td>
+
                         <td>{{$post->type}}</td>
                         <td>{{$post->created_at}}</td>
                         <td>{{$post->status}}</td>
@@ -49,7 +49,7 @@
                        </tr>
                        @include('posts.delete')
                        @endforeach
-                       
+
                     @endif
                 </tbody>
             </table>
