@@ -92,6 +92,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        
         $post->title = $request->title;
         $post->body = $request->body;
         $post->slug = $request->slug;
@@ -106,8 +107,16 @@ class PostController extends Controller
             $post->status = "draft";
         }
 
-        $post->save();
+        
+        if ($post->save()){
+            if($request->has("image")){
+                $file =$request->file("image");
+                $fileName = time().'_'.$file->getClientOriginalName();
+                $request->file("image")->storeAs("uploads", $fileName, "public");
+            }
+        }
         return redirect("/posts");
+
     }
 
     /**

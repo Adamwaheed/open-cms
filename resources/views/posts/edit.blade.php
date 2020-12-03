@@ -7,7 +7,7 @@
             <h5 class="card-title">New Post</h5>
             <h6 class="card-subtitle mb-2 text-muted">Create a New post</h6>
 
-        <form action="{{route('posts.update', $post->id)}}" method="POST">
+        <form action="{{route('posts.update', $post->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method("PUT")
             <div class="form-group">
@@ -42,6 +42,10 @@
                 <option value="{{$category->id}}">{{$category->name}}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="">Image</label>
+                <input id="image" type="file" class="form-control" name="image">
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
